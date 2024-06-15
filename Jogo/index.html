@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advinhe</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+        margin: 0;
+        color: #343a40;
+    }
+    h1{
+        color: #007bff;
+    }
+    p{
+        margin: 10px 0;
+        font-size: 18px;
+    }
+    input, button{
+        margin: 5px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+     
+    }
+    button{
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        transition: background-color 0.3s;
+    }
+    button:hover{
+        background-color: #0056b3;
+    }
+    #result{
+        margin-top: 20px;
+        font-size: 18px;
+    
+    }
+    #resetButton{
+        background-color: #dc3545;
+    }
+    #reserButton:hover{
+        background-color: #c82333;
+    }
+</style>
+<body>
+    <h1>Jogo de Adivinhação</h1>
+    <p>Tente advinhar um número de 1 a 100</p>
+    <input type="number" id="guessInput" min="1" max="100" />
+    <button onclick="makeGuess()">Advinhar</button>
+    <button id="resetButton" onclick="resetGame()">Resetar jogo</button>
+    <p id="result"></p>
+
+    <script>
+        let randomNumber = Math.floor(Math.random()*100)+ 1;
+
+        function makeGuess(){
+            const guess = document.getElementById('guessInput').value;
+            const result = document.getElementById('result');
+            
+            if(guess<1||guess>100){
+                result.textContent= 'Por favor, insira um número de 1 a 100!';
+            } else if (guess < randomNumber){
+                result.textContent = 'Muito baixo, Tente novamente!';
+            } else if (guess > randomNumber){
+                result.textContent = 'Muito alto, Tente novamente!';
+            } else {
+                result.textContent = `DEMAIS! Parabéns, você advinhou o  número ${randomNumber}.`;
+            }
+        }
+        function resetGame(){
+            randomNumber = Math.floor(Math.random()*100)+1;
+            document.getElementById('guessInput').value = '';
+            document.getElementById('result').textContent = '';
+        }
+    </script>
+</body>
+</html>
